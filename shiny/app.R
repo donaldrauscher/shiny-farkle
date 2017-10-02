@@ -89,7 +89,9 @@ play <- function(bank, remaining, depth = 1, max_depth = 3, verbose = FALSE){
   return(list(
     "roll" = avg_play_bank > bank,
     "bank" = max(avg_play_bank, bank),
-    "zero_score" = ifelse(avg_play_bank > bank, avg_play_zero_score, 0)    
+    "zero_score" = ifelse(avg_play_bank > bank, avg_play_zero_score, 0),
+    "avg_play_bank" = avg_play_bank,
+    "avg_play_zero_score" = avg_play_zero_score  
   ))
 }
 
@@ -112,8 +114,8 @@ server <- function(input, output) {
   output$text <- renderUI({
     result <- play(input$bank, input$remaining, 1, input$max_depth)
     roll <- ifelse(result$roll, "Keep Rolling!", "Stop!")
-    bank <- sprintf("Expected points: %0.1f", round(result$bank))
-    zero_score <- sprintf("Probability of scoring zero points: %.1f%%", result$zero_score*100)
+    bank <- sprintf("Expected points: %0.1f", round(result$avg_play_bank))
+    zero_score <- sprintf("Probability of scoring zero points: %.1f%%", result$avg_play_zero_score*100)
     HTML(paste0(h3(roll), h5(bank), h5(zero_score)))
   })
 
