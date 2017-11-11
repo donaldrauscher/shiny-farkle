@@ -1,0 +1,15 @@
+apiVersion: extensions/v1beta1
+kind: Deployment
+metadata:
+  name: shiny-farkle-deploy
+spec:
+  template:
+    metadata:
+      labels:
+        app: shiny-farkle
+    spec:
+      containers:
+      - name: master
+        image: gcr.io/blog-180218/shiny-farkle:latest
+        ports:
+        - containerPort: 3838
