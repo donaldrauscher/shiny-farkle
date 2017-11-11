@@ -1,0 +1,10 @@
+apiVersion: extensions/v1beta1
+kind: Ingress
+metadata:
+  name: shiny-ingress
+  annotations:
+    kubernetes.io/ingress.global-static-ip-name: shiny-static-ip
+spec:
+  backend:
+    serviceName: shiny-farkle-service
+    servicePort: 80
