@@ -13,6 +13,7 @@ spec:
     spec:
       containers:
       - name: master
+        imagePullPolicy: Always
         image: gcr.io/blog-180218/shiny-farkle:latest
         ports:
         - containerPort: 3838
