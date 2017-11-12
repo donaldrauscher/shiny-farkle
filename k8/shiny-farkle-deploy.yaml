@@ -2,7 +2,10 @@ apiVersion: extensions/v1beta1
 kind: Deployment
 metadata:
   name: shiny-farkle-deploy
+  labels:
+    app: shiny-farkle
 spec:
+  replicas: 3
   template:
     metadata:
       labels:

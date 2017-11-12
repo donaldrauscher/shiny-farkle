@@ -5,6 +5,10 @@ metadata:
   annotations:
     kubernetes.io/ingress.global-static-ip-name: shiny-static-ip
 spec:
-  backend:
-    serviceName: shiny-farkle-service
-    servicePort: 80
+  rules:
+  - host: farkle.shiny.donaldrauscher.com
+    http:
+      paths:
+      - backend:
+          serviceName: shiny-farkle-service
+          servicePort: 80
