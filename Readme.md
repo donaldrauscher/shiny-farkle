@@ -23,12 +23,12 @@ gcloud container images list-tags gcr.io/${PROJECT_ID}/shiny-farkle
 
 (3) Create cluster on Google Container Engine and deploy using Kubernetes
 ```
-terraform apply -var 'project=${PROJECT_ID}'
+terraform apply -var $(printf 'project=%s' $PROJECT_ID)
 
 gcloud container clusters get-credentials shiny-cluster
 gcloud config set container/cluster shiny-cluster
 
-ktmpl k8s/farkle-app.yaml \
+ktmpl k8s/shiny-farkle-app.yaml \
   --parameter PROJECT_ID ${PROJECT_ID} \
   --parameter DOMAIN farkle.shiny.donaldrauscher.com | kubectl apply -f -
 ```
