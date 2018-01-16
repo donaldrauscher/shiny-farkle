@@ -23,9 +23,12 @@ gcloud container images list-tags gcr.io/${PROJECT_ID}/shiny-farkle
 
 (3) Create cluster on Google Container Engine and deploy using Kubernetes
 ```
-gcloud container clusters create shiny-cluster --num-nodes=3
-gcloud compute addresses create shiny-static-ip --global
-kubectl apply -f k8s/shiny-farkle-deploy.yaml
-kubectl apply -f k8s/shiny-farkle-service.yaml
-kubectl apply -f k8s/shiny-ingress.yaml
+terraform apply -var 'project=${PROJECT_ID}'
+
+gcloud container clusters get-credentials shiny-cluster
+gcloud config set container/cluster shiny-cluster
+
+ktmpl k8s/farkle-app.yaml \
+  --parameter PROJECT_ID ${PROJECT_ID} \
+  --parameter DOMAIN farkle.shiny.donaldrauscher.com | kubectl apply -f -
 ```
