@@ -32,3 +32,5 @@ ktmpl k8s/shiny-farkle-app.yaml \
   --parameter PROJECT_ID ${PROJECT_ID} \
   --parameter DOMAIN farkle.shiny.donaldrauscher.com | kubectl apply -f -
 ```
+
+NOTE: I used a nifty tool called [`ktmpl`](https://github.com/jimmycuadra/ktmpl) for doing parameter substitutions in my Kubernetes manifests.
