@@ -28,9 +28,7 @@ terraform apply -var $(printf 'project=%s' $PROJECT_ID)
 gcloud container clusters get-credentials shiny-cluster
 gcloud config set container/cluster shiny-cluster
 
-ktmpl k8s/shiny-farkle-app.yaml \
-  --parameter PROJECT_ID ${PROJECT_ID} \
-  --parameter DOMAIN farkle.shiny.donaldrauscher.com | kubectl apply -f -
+helm install . --set projectId=${PROJECT_ID}
 ```
 
-NOTE: I used a nifty tool called [`ktmpl`](https://github.com/jimmycuadra/ktmpl) for doing parameter substitutions in my Kubernetes manifests.
+NOTE: I packaged my Kubernetes resources in [a Helm chart](https://helm.sh/).

@@ -1,0 +1,19 @@
+apiVersion: extensions/v1beta1
+kind: Deployment
+metadata:
+  name: shiny-farkle-deploy
+  labels:
+    app: shiny-farkle
+spec:
+  replicas: 1
+  template:
+    metadata:
+      labels:
+        app: shiny-farkle
+    spec:
+      containers:
+      - name: master
+        imagePullPolicy: Always
+        image: gcr.io/{{ .Values.projectId }}/shiny-farkle:latest
+        ports:
+        - containerPort: 3838

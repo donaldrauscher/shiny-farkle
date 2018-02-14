@@ -1,0 +1,6 @@
+.git/
+.gitignore
+.terraform/
+terraform.tf*
+Dockerfile
+shiny/

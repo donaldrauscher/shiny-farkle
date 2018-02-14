@@ -1,0 +1,15 @@
+apiVersion: v1
+kind: Service
+metadata:
+  name: shiny-farkle-service
+  annotations:
+    kubernetes.io/ingress.global-static-ip-name: shiny-static-ip
+  labels:
+    app: shiny-farkle
+spec:
+  type: LoadBalancer
+  ports:
+  - port: 80
+    targetPort: 3838
+  selector:
+    app: shiny-farkle
